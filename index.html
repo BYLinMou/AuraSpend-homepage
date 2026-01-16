@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraSpend - 用 AI 記帳，讓每筆消費都變得輕鬆。拍張收據，AI 自動填入；專屬助理與互動化報表，幫你看清每一分花費。">
+    <title>AuraSpend - AI 智能記帳與預算管理</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="assets/logo.png" alt="AuraSpend Logo" class="logo-img">
+                    <span class="logo-text">AuraSpend</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">功能</a></li>
+                    <li><a href="#how-it-works">使用方式</a></li>
+                    <li><a href="#screenshots">展示</a></li>
+                    <li><a href="#roadmap">未來規劃</a></li>
+                    <li><a href="#download" class="btn-primary-small">立即下載</a></li>
+                </ul>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">用 AI 記帳，<br>讓每筆消費都變得輕鬆</h1>
+                    <p class="hero-subtitle">拍張收據，AI 自動填入；專屬助理與互動化報表，幫你看清每一分花費。</p>
+                    <div class="hero-cta">
+                        <a href="https://github.com/BYLinMou/COMP3330-Gp20-AuraSpend/releases" class="btn-primary" target="_blank" rel="noopener noreferrer">立即下載 (APK)</a>
+                        <a href="#how-it-works" class="btn-secondary">了解更多</a>
+                    </div>
+                    <div class="hero-badges">
+                        <a href="https://apps.apple.com/us/app/auraspend/id000000000" target="_blank" rel="noopener noreferrer"><img src="assets/badges/us/app-store-us.svg" alt="Download on App Store" class="store-badge"></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.auraspend" target="_blank" rel="noopener noreferrer"><img src="assets/badges/us/google-play-us.svg" alt="Get it on Google Play" class="store-badge"></a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-embed" id="hero-video-container" aria-hidden="false">
+                        <iframe id="hero-yt" src="https://www.youtube.com/embed/LM8KUN80FBA?autoplay=1&mute=1&loop=1&playlist=LM8KUN80FBA&controls=1&rel=0&modestbranding=1&enablejsapi=1" title="AuraSpend demo video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <button class="pip-close" aria-label="關閉小窗口">×</button>
+                    </div>
+                    <!-- <div class="hero-controls" aria-hidden="false">
+                        <button class="hero-btn hero-play" aria-label="Play/Pause">▶</button>
+                        <button class="hero-btn hero-mute" aria-label="Mute/Unmute">🔈</button>
+                        <a href="https://www.youtube.com/watch?v=LM8KUN80FBA" class="hero-btn hero-open" target="_blank" rel="noopener noreferrer">在 YouTube 打開</a>
+                    </div>                 -->
+                </div>
+            </div>
+        </div>
+        <div class="hero-gradient"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">核心功能</h2>
+                <p class="section-subtitle">強大的 AI 技術，簡化你的記帳流程</p>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1: OCR -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="assets/features/ocr-icon.png" alt="智慧 OCR">
+                    </div>
+                    <h3 class="feature-title">智慧 OCR</h3>
+                    <p class="feature-description">自動擷取商家、金額與分類，省時又精準。拍張收據，AI 立即識別並填入交易資訊。</p>
+                    <div class="feature-visual">
+                        <img src="assets/features/ocr-demo.png" alt="OCR Demo">
+                    </div>
+                </div>
+
+                <!-- Feature 2: Budget -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="assets/features/budget-icon.png" alt="預算洞察">
+                    </div>
+                    <h3 class="feature-title">預算洞察</h3>
+                    <p class="feature-description">設定預算並查看視覺化進度與歷史趨勢。掌控每個類別的開支情況。</p>
+                    <div class="feature-visual">
+                        <img src="assets/features/budget-demo.png" alt="Budget Demo">
+                    </div>
+                </div>
+
+                <!-- Feature 3: AI Assistant -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="assets/features/ai-icon.png" alt="AI 助手">
+                    </div>
+                    <h3 class="feature-title">AI 助手</h3>
+                    <p class="feature-description">一句話即可查詢支出摘要或獲得節省建議。智能分析你的消費習慣。</p>
+                    <div class="feature-visual">
+                        <img src="assets/features/ai-demo.png" alt="AI Assistant Demo">
+                    </div>
+                </div>
+
+                <!-- Feature 4: Gamification -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="assets/features/pet-icon.png" alt="寵物化激勵">
+                    </div>
+                    <h3 class="feature-title">寵物化激勵</h3>
+                    <p class="feature-description">遊戲化元素提高長期使用黏性。培養虛擬寵物，完成記帳任務獲得獎勵。</p>
+                    <div class="feature-visual">
+                        <img src="assets/features/pet-demo.png" alt="Pet Companion Demo">
+                    </div>
+                </div>
+
+                <!-- Feature 5: Multi-currency -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="assets/features/currency-icon.png" alt="多幣別支援">
+                    </div>
+                    <h3 class="feature-title">多幣別支援</h3>
+                    <p class="feature-description">支援多種貨幣與離線快取功能。旅行記帳也能輕鬆搞定。</p>
+                    <div class="feature-visual">
+                        <img src="assets/features/currency-demo.png" alt="Multi-currency Demo">
+                    </div>
+                </div>
+
+                <!-- Feature 6: Real-time Sync -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="assets/features/sync-icon.png" alt="即時同步">
+                    </div>
+                    <h3 class="feature-title">即時同步</h3>
+                    <p class="feature-description">多設備即時同步，資料安全備份。手機、平板無縫切換使用。</p>
+                    <div class="feature-visual">
+                        <img src="assets/features/sync-demo.png" alt="Sync Demo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">使用流程</h2>
+                <p class="section-subtitle">三步驟完成記帳，簡單又快速</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-visual">
+                        <img src="assets/steps/step1-capture.png" alt="拍攝收據">
+                    </div>
+                    <h3 class="step-title">拍攝或上傳收據</h3>
+                    <p class="step-description">使用手機相機拍攝收據，或從相簿選擇已有的收據照片。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-visual">
+                        <img src="assets/steps/step2-ai.png" alt="AI 辨識">
+                    </div>
+                    <h3 class="step-title">AI 辨識 OCR</h3>
+                    <p class="step-description">AI 自動識別商家名稱、金額、日期與消費類別。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-visual">
+                        <img src="assets/steps/step3-save.png" alt="自動儲存">
+                    </div>
+                    <h3 class="step-title">自動填入並儲存</h3>
+                    <p class="step-description">確認資訊無誤後，一鍵儲存為交易記錄，完成記帳。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">應用展示</h2>
+                <p class="section-subtitle">探索 AuraSpend 的精美介面與強大功能</p>
+            </div>
+            <div class="screenshots-carousel">
+                <button class="carousel-button prev" aria-label="Previous">‹</button>
+                <div class="screenshots-track">
+                    <div class="screenshot-item">
+                        <img src="assets/screenshots/dashboard.png" alt="儀表板">
+                        <p class="screenshot-caption">儀表板總覽</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="assets/screenshots/add-transaction.png" alt="添加交易">
+                        <p class="screenshot-caption">添加交易</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="assets/screenshots/reports.png" alt="報表分析">
+                        <p class="screenshot-caption">視覺化報表</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="assets/screenshots/pet.png" alt="寵物頁面">
+                        <p class="screenshot-caption">寵物與成就</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="assets/screenshots/ai-assistant.png" alt="AI 助手">
+                        <p class="screenshot-caption">AI 聊天助手</p>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="assets/screenshots/settings.png" alt="設定">
+                        <p class="screenshot-caption">設定與偏好</p>
+                    </div>
+                </div>
+                <button class="carousel-button next" aria-label="Next">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights">
+        <div class="container">
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-icon">🔒</div>
+                    <h3>隱私與安全</h3>
+                    <p>API 金鑰集中管理，資料加密傳輸與儲存，保護你的財務隱私。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">⚡</div>
+                    <h3>即時同步</h3>
+                    <p>基於 Supabase Realtime，多設備即時同步，資料永不遺失。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">📱</div>
+                    <h3>離線可用</h3>
+                    <p>支援離線快取，沒網路也能記帳，聯網後自動同步。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">🌍</div>
+                    <h3>多語言多幣別</h3>
+                    <p>支援多種語言與貨幣，全球使用者都能輕鬆上手。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="roadmap">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">未來規劃</h2>
+                <p class="section-subtitle">我們正在開發更多令人興奮的功能</p>
+            </div>
+            <div class="roadmap-timeline">
+                <div class="roadmap-item">
+                    <div class="roadmap-badge current">進行中</div>
+                    <h3 class="roadmap-title">AI Workflow</h3>
+                    <p class="roadmap-description">定時生成報表並自動寄送至 Email。當超過預算或支出異常升高時，AI 會主動發送提醒與建議。</p>
+                    <ul class="roadmap-features">
+                        <li>每週/月報自動生成</li>
+                        <li>Email 與 Push 通知</li>
+                        <li>智能預算提醒</li>
+                    </ul>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-badge upcoming">即將推出</div>
+                    <h3 class="roadmap-title">Batch Processing</h3>
+                    <p class="roadmap-description">批次上傳多張收據，AI 批次解析並生成待審核的交易清單，支援批次分類與標註。</p>
+                    <ul class="roadmap-features">
+                        <li>一次上傳多張收據</li>
+                        <li>批次審核與確認</li>
+                        <li>批次分類功能</li>
+                    </ul>
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-badge future">未來計劃</div>
+                    <h3 class="roadmap-title">更多功能</h3>
+                    <p class="roadmap-description">手寫辨識、離線 ML 模型、企業版功能等更多實用工具正在開發中。</p>
+                    <ul class="roadmap-features">
+                        <li>多語手寫辨識</li>
+                        <li>離線 ML 模型</li>
+                        <li>企業多人協作</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download/CTA Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-content">
+                <h2 class="download-title">開始使用 AuraSpend</h2>
+                <p class="download-subtitle">立即下載，體驗 AI 智能記帳的便利</p>
+                <div class="download-buttons">
+                    <a href="https://apps.apple.com/us/app/auraspend/id000000000" class="download-btn" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/badges/us/app-store-us.svg" alt="Download on App Store">
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.auraspend" class="download-btn" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/badges/us/google-play-us.svg" alt="Get it on Google Play">
+                    <!-- </a>
+                    <a href="https://expo.dev/@your-username/auraspend" class="download-btn expo" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/badges/expo-download.svg" alt="Try with Expo">
+                    </a> -->
+                    <a href="https://github.com/BYLinMou/COMP3330-Gp20-AuraSpend/releases" class="download-btn apk" target="_blank" rel="noopener noreferrer">
+                        <img src="assets/badges/apk-badge.svg" alt="Download APK">
+                    </a>
+                </div>
+                <p class="download-note">或加入內測計劃，搶先體驗最新功能</p>
+                <a href="#" class="btn-secondary">加入內測</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/logo.png" alt="AuraSpend">
+                        <span>AuraSpend</span>
+                    </div>
+                    <p class="footer-description">用 AI 記帳，讓每筆消費都變得輕鬆</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="GitHub"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                        <a href="#" aria-label="Twitter"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path></svg></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">產品</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">功能介紹</a></li>
+                        <li><a href="#how-it-works">使用方式</a></li>
+                        <li><a href="#roadmap">未來規劃</a></li>
+                        <li><a href="#download">立即下載</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">資源</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">技術文檔</a></li>
+                        <li><a href="#">API 文件</a></li>
+                        <li><a href="#">GitHub 倉庫</a></li>
+                        <li><a href="#">問題回報</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">聯絡我們</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">support@auraspend.com</a></li>
+                        <li><a href="#">GitHub Issues</a></li>
+                        <li><a href="#">隱私政策</a></li>
+                        <li><a href="#">服務條款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AuraSpend. All rights reserved.</p>
+                <div class="footer-lang">
+                    <button class="lang-switch active">繁體中文</button>
+                    <button class="lang-switch">English</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
