@@ -295,13 +295,13 @@ function initCarousel() {
             console.log('⏰ Autoplay already running');
             return;
         }
-        console.log('▶️ Starting autoplay with interval:', interval);
+        // console.log('▶️ Starting autoplay with interval:', interval);
         autoplayTimer = setInterval(next, interval);
     };
 
     const stopAutoplay = () => {
         if (!autoplayTimer) return;
-        console.log('⏸️ Stopping autoplay');
+        // console.log('⏸️ Stopping autoplay');
         clearInterval(autoplayTimer);
         autoplayTimer = null;
     };

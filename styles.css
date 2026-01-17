@@ -442,14 +442,14 @@ body {
    =========================== */
 .section-header {
     text-align: center;
-    margin-bottom: var(--spacing-3xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 .section-title {
     font-size: var(--font-size-4xl);
     font-weight: 800;
     color: var(--gray-900);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .section-subtitle {
@@ -637,11 +637,11 @@ body {
 /* iPhone 外殼容器 */
 .screenshot-item {
     position: absolute;
-    width: 260px;
-    height: 520px;
+    width: 265px;
+    height: 565px;
     background: #000;
     border-radius: 40px;
-    padding: 6px;
+    padding: 8px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     transform-style: preserve-3d;
@@ -663,18 +663,18 @@ body {
 }
 
 /* 底部導覽條 (Home Indicator) */
-.screenshot-item::after {
+/* .screenshot-item::after {
     content: "";
     position: absolute;
-    bottom: 12px;
+    bottom: 11px;
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.25);
+    height: 2.5px;
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     z-index: 10;
-}
+} */
 
 .screenshot-item img {
     width: 100%;
@@ -719,7 +719,7 @@ body {
 /* 標題優化 */
 .screenshot-caption {
     position: absolute;
-    bottom: -65px;
+    /* bottom: -65px; */
     left: 0;
     width: 100%;
     text-align: center;
@@ -729,6 +729,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.4s ease;
+    padding: 60px;
 }
 
 .screenshot-item.active .screenshot-caption {
@@ -782,12 +783,13 @@ body {
 /* 分頁點 - 絕對置中並修復位置 */
 .carousel-dots {
     position: absolute;
-    bottom: 15px;
+    /* bottom: 15px; */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
     z-index: 25;
+    padding: 10px;
 }
 
 .carousel-dots button {
@@ -822,7 +824,8 @@ body {
 /* 響應式調整 */
 @media (max-width: 900px) {
     .screenshots-carousel { height: 520px; }
-    .screenshot-item { width: 220px; height: 440px; }
+    .screenshot-item { width: 225px; height: 480px; padding: 6.5px; border-radius: 32px; }
+    .screenshot-item img { border-radius: 26px; }
     .screenshot-item.prev { transform: translateX(-240px) translateZ(-80px) rotateY(18deg) scale(0.85); }
     .screenshot-item.next { transform: translateX(240px) translateZ(-80px) rotateY(-18deg) scale(0.85); }
     .carousel-button { width: 42px; height: 42px; }
@@ -832,7 +835,7 @@ body {
 
 @media (max-width: 520px) {
     .screenshots-carousel { height: 450px; }
-    .screenshot-item { width: 180px; height: 360px; padding: 8px; border-radius: 32px; }
+    .screenshot-item { width: 200px; height: 430px; padding: 5px; border-radius: 32px; }
     .screenshot-item img { border-radius: 26px; }
     .screenshot-item::before { width: 55px; height: 18px; top: 14px; }
     .screenshot-item.active { transform: translateX(0) translateZ(100px) scale(1); }
