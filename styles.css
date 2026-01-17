@@ -245,14 +245,14 @@ body {
 .hero-subtitle {
     font-size: var(--font-size-xl);
     color: var(--gray-600);
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
     line-height: 1.6;
 }
 
 .hero-cta {
     display: flex;
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 .hero-badges {
@@ -442,14 +442,14 @@ body {
    =========================== */
 .section-header {
     text-align: center;
-    margin-bottom: var(--spacing-3xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 .section-title {
     font-size: var(--font-size-4xl);
     font-weight: 800;
     color: var(--gray-900);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
 }
 
 .section-subtitle {
@@ -598,80 +598,259 @@ body {
 }
 
 /* ===========================
-   Screenshots Section
+   Screenshots Section - Apple iPhone Style 3D Carousel
    =========================== */
 .screenshots {
     padding: var(--spacing-3xl) 0;
-    background: white;
+    background: #fafafa;
 }
 
 .screenshots-carousel {
     position: relative;
-    overflow: hidden;
+    height: 600px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    perspective: 2000px;
+}
+
+.screenshots-viewport {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
 }
 
 .screenshots-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
-    gap: var(--spacing-lg);
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: var(--spacing-md) 0;
-    scrollbar-width: none;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
 }
 
-.screenshots-track::-webkit-scrollbar {
-    display: none;
-}
-
+/* iPhone 外殼容器 */
 .screenshot-item {
-    flex: 0 0 300px;
-    text-align: center;
+    position: absolute;
+    width: 265px;
+    height: 565px;
+    background: #000;
+    border-radius: 40px;
+    padding: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
 }
+
+/* 動態島 (Dynamic Island) */
+.screenshot-item::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 22px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+/* 底部導覽條 (Home Indicator) */
+/* .screenshot-item::after {
+    content: "";
+    position: absolute;
+    bottom: 11px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2.5px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    z-index: 10;
+} */
 
 .screenshot-item img {
     width: 100%;
-    height: 600px;
-    object-fit: contain;
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-xl);
-    background: var(--gray-100);
+    height: 100%;
+    object-fit: cover;
+    border-radius: 32px;
+    background: #f8fafc;
+    display: block;
 }
 
+/* 狀態定義 - 桌面版同時顯示 3 張 (中間大，兩側小且模糊) */
+.screenshot-item.active {
+    transform: translateX(0) translateZ(120px) scale(1.08);
+    z-index: 10;
+    opacity: 1;
+    filter: blur(0);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.screenshot-item.prev {
+    transform: translateX(-310px) translateZ(-80px) rotateY(18deg) scale(0.86);
+    z-index: 5;
+    opacity: 0.75; /* 提高可見度，讓用戶知道有其他卡片 */
+    filter: blur(1px); /* 適度模糊 */
+}
+
+.screenshot-item.next {
+    transform: translateX(310px) translateZ(-80px) rotateY(-18deg) scale(0.86);
+    z-index: 5;
+    opacity: 0.75;
+    filter: blur(1px);
+}
+
+.screenshot-item.hidden {
+    transform: translateX(0) translateZ(-500px) scale(0.4);
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* 標題優化 */
 .screenshot-caption {
-    margin-top: var(--spacing-md);
-    font-weight: 600;
-    color: var(--gray-700);
+    position: absolute;
+    /* bottom: -65px; */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    padding: 60px;
 }
 
+.screenshot-item.active .screenshot-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 控制按鈕 */
 .carousel-button {
     position: absolute;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     background: white;
-    border: 2px solid var(--gray-300);
-    width: 50px;
-    height: 50px;
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-3xl);
-    color: var(--gray-700);
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    color: var(--gray-800);
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 30;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 減輕陰影 */
 }
 
 .carousel-button:hover {
     background: var(--primary);
     color: white;
-    border-color: var(--primary);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.25);
+}
+
+.carousel-button:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-button.prev {
-    left: 0;
+    left: 80px; /* 靠近主畫面：從 30px 改為 80px */
 }
 
 .carousel-button.next {
-    right: 0;
+    right: 80px; /* 靠近主畫面：從 30px 改為 80px */
 }
+
+.carousel-button:focus {
+    outline: 2px solid rgba(99,102,241,0.5);
+}
+
+/* 分頁點 - 絕對置中並修復位置 */
+.carousel-dots {
+    position: absolute;
+    /* bottom: 15px; */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 25;
+    padding: 10px;
+}
+
+.carousel-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dots button:hover {
+    background: rgba(99, 102, 241, 0.5);
+}
+
+.carousel-dots button[aria-selected="true"] {
+    background: var(--primary);
+    width: 24px;
+    border-radius: 10px;
+}
+
+/* Announcer (screen-reader only) */
+.sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* 響應式調整 */
+@media (max-width: 900px) {
+    .screenshots-carousel { height: 520px; }
+    .screenshot-item { width: 225px; height: 480px; padding: 6.5px; border-radius: 32px; }
+    .screenshot-item img { border-radius: 26px; }
+    .screenshot-item.prev { transform: translateX(-240px) translateZ(-80px) rotateY(18deg) scale(0.85); }
+    .screenshot-item.next { transform: translateX(240px) translateZ(-80px) rotateY(-18deg) scale(0.85); }
+    .carousel-button { width: 42px; height: 42px; }
+    .carousel-button.prev { left: 15px; }
+    .carousel-button.next { right: 15px; }
+}
+
+@media (max-width: 520px) {
+    .screenshots-carousel { height: 450px; }
+    .screenshot-item { width: 200px; height: 430px; padding: 5px; border-radius: 32px; }
+    .screenshot-item img { border-radius: 26px; }
+    .screenshot-item::before { width: 55px; height: 18px; top: 14px; }
+    .screenshot-item.active { transform: translateX(0) translateZ(100px) scale(1); }
+    .screenshot-item.prev { transform: translateX(-190px) translateZ(-60px) rotateY(15deg) scale(0.8); }
+    .screenshot-item.next { transform: translateX(190px) translateZ(-60px) rotateY(-15deg) scale(0.8); }
+    .carousel-button { width: 38px; height: 38px; font-size: 1.2rem; }
+    .carousel-button.prev { left: 10px; }
+    .carousel-button.next { right: 10px; }
+}
+
+/* 尊重減少動畫偏好 */
+@media (prefers-reduced-motion: reduce) {
+    .screenshot-item { transition: none !important; }
+}
+
 
 /* ===========================
    Highlights Section
@@ -1016,7 +1195,23 @@ body {
     }
     
     .hero-cta {
-        flex-direction: column;
+        flex-direction: row;
+        gap: var(--spacing-sm);
+    }
+
+    .hero-badges {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .store-badge {
+        height: 60px;
+        width: auto;
+    }
+
+    .hero-cta {
+        justify-content: flex-start;
     }
     
     .section-title {
@@ -1054,5 +1249,27 @@ body {
     .download-buttons {
         flex-direction: column;
         align-items: center;
+        gap: var(--spacing-sm);
+    }
+
+    .download-btn img {
+        width: 200px;
+        height: auto;
+    }
+
+    .download .btn-secondary {
+        width: auto;
+        padding: 0.75rem 1.5rem;
+        margin: 0 auto;
+    }
+
+    .hero-badges {
+        justify-content: flex-start;
+    }
+
+    .hero-badges .store-badge {
+        /* align-items: center; */
+        height: 50px;
+        width: auto;
     }
 }

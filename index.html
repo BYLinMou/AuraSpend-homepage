@@ -43,7 +43,7 @@
                     <h1 class="hero-title">用 AI 記帳，<br>讓每筆消費都變得輕鬆</h1>
                     <p class="hero-subtitle">拍張收據，AI 自動填入；專屬助理與互動化報表，幫你看清每一分花費。</p>
                     <div class="hero-cta">
-                        <a href="https://github.com/BYLinMou/COMP3330-Gp20-AuraSpend/releases" class="btn-primary" target="_blank" rel="noopener noreferrer">立即下載 (APK)</a>
+                        <a href="https://github.com/BYLinMou/COMP3330-Gp20-AuraSpend/releases/latest/download/AuraSpend.apk" class="btn-primary" rel="noopener noreferrer">立即下載 (APK)</a>
                         <a href="#how-it-works" class="btn-secondary">了解更多</a>
                     </div>
                     <div class="hero-badges">
@@ -66,6 +66,127 @@
         </div>
         <div class="hero-gradient"></div>
     </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">應用展示</h2>
+                <p class="section-subtitle">探索 AuraSpend 的精美介面與強大功能</p>
+            </div>
+            <div class="screenshots-carousel" data-autoplay="true" data-interval="3000" role="region" aria-label="App screenshots carousel" tabindex="0">
+                <button class="carousel-button prev" aria-label="Previous slide">‹</button>
+
+                <!-- Viewport wraps the track to enable transform-based sliding -->
+                <div class="screenshots-viewport">
+                    <div class="screenshots-track" aria-live="polite">
+                        <!-- Use lightweight inline SVG as initial placeholder; real images are set in data-src -->
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/dashboard.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="儀表板">
+                            <p class="screenshot-caption">儀表板總覽</p>
+                        </div>                        
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/reports.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="報表分析">
+                            <p class="screenshot-caption">視覺化報表</p>
+                        </div>
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/add-transaction.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="添加交易">
+                            <p class="screenshot-caption">添加交易</p>
+                        </div>
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/ai-assistant.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="AI 助手">
+                            <p class="screenshot-caption">AI 聊天助手</p>
+                        </div>                        
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/pet.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="寵物頁面">
+                            <p class="screenshot-caption">寵物與成就</p>
+                        </div>                        
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/settings.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="設定">
+                            <p class="screenshot-caption">設定與偏好</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-button next" aria-label="Next slide">›</button>
+
+                <!-- Dots (will be populated by JS) -->
+                <div class="carousel-dots" role="tablist" aria-label="Carousel pagination"></div>
+
+                <!-- Live region for screen reader announcements -->
+                <div class="carousel-announcer sr-only" aria-live="polite" aria-atomic="true"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">使用流程</h2>
+                <p class="section-subtitle">三步驟完成記帳，簡單又快速</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-visual">
+                        <img src="assets/steps/step1-capture.png" alt="拍攝收據">
+                    </div>
+                    <h3 class="step-title">拍攝或上傳收據</h3>
+                    <p class="step-description">使用手機相機拍攝收據，或從相簿選擇已有的收據照片。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-visual">
+                        <img src="assets/steps/step2-ai.png" alt="AI 辨識">
+                    </div>
+                    <h3 class="step-title">AI 辨識 OCR</h3>
+                    <p class="step-description">AI 自動識別商家名稱、金額、日期與消費類別。</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-visual">
+                        <img src="assets/steps/step3-save.png" alt="自動儲存">
+                    </div>
+                    <h3 class="step-title">自動填入並儲存</h3>
+                    <p class="step-description">確認資訊無誤後，一鍵儲存為交易記錄，完成記帳。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Highlights Section -->
+    <section class="highlights">
+        <div class="container">
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-icon">🔒</div>
+                    <h3>隱私與安全</h3>
+                    <p>API 金鑰集中管理，資料加密傳輸與儲存，保護你的財務隱私。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">⚡</div>
+                    <h3>即時同步</h3>
+                    <p>基於 Supabase Realtime，多設備即時同步，資料永不遺失。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">📱</div>
+                    <h3>離線可用</h3>
+                    <p>支援離線快取，沒網路也能記帳，聯網後自動同步。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">🌍</div>
+                    <h3>多語言多幣別</h3>
+                    <p>支援多種語言與貨幣，全球使用者都能輕鬆上手。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Features Section -->
     <section id="features" class="features">
@@ -150,111 +271,6 @@
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">使用流程</h2>
-                <p class="section-subtitle">三步驟完成記帳，簡單又快速</p>
-            </div>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-visual">
-                        <img src="assets/steps/step1-capture.png" alt="拍攝收據">
-                    </div>
-                    <h3 class="step-title">拍攝或上傳收據</h3>
-                    <p class="step-description">使用手機相機拍攝收據，或從相簿選擇已有的收據照片。</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-visual">
-                        <img src="assets/steps/step2-ai.png" alt="AI 辨識">
-                    </div>
-                    <h3 class="step-title">AI 辨識 OCR</h3>
-                    <p class="step-description">AI 自動識別商家名稱、金額、日期與消費類別。</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-visual">
-                        <img src="assets/steps/step3-save.png" alt="自動儲存">
-                    </div>
-                    <h3 class="step-title">自動填入並儲存</h3>
-                    <p class="step-description">確認資訊無誤後，一鍵儲存為交易記錄，完成記帳。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Screenshots Section -->
-    <section id="screenshots" class="screenshots">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">應用展示</h2>
-                <p class="section-subtitle">探索 AuraSpend 的精美介面與強大功能</p>
-            </div>
-            <div class="screenshots-carousel">
-                <button class="carousel-button prev" aria-label="Previous">‹</button>
-                <div class="screenshots-track">
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/dashboard.png" alt="儀表板">
-                        <p class="screenshot-caption">儀表板總覽</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/add-transaction.png" alt="添加交易">
-                        <p class="screenshot-caption">添加交易</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/reports.png" alt="報表分析">
-                        <p class="screenshot-caption">視覺化報表</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/pet.png" alt="寵物頁面">
-                        <p class="screenshot-caption">寵物與成就</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/ai-assistant.png" alt="AI 助手">
-                        <p class="screenshot-caption">AI 聊天助手</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/settings.png" alt="設定">
-                        <p class="screenshot-caption">設定與偏好</p>
-                    </div>
-                </div>
-                <button class="carousel-button next" aria-label="Next">›</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Highlights Section -->
-    <section class="highlights">
-        <div class="container">
-            <div class="highlights-grid">
-                <div class="highlight-card">
-                    <div class="highlight-icon">🔒</div>
-                    <h3>隱私與安全</h3>
-                    <p>API 金鑰集中管理，資料加密傳輸與儲存，保護你的財務隱私。</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">⚡</div>
-                    <h3>即時同步</h3>
-                    <p>基於 Supabase Realtime，多設備即時同步，資料永不遺失。</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">📱</div>
-                    <h3>離線可用</h3>
-                    <p>支援離線快取，沒網路也能記帳，聯網後自動同步。</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">🌍</div>
-                    <h3>多語言多幣別</h3>
-                    <p>支援多種語言與貨幣，全球使用者都能輕鬆上手。</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Roadmap Section -->
     <section id="roadmap" class="roadmap">
@@ -266,22 +282,23 @@
             <div class="roadmap-timeline">
                 <div class="roadmap-item">
                     <div class="roadmap-badge current">進行中</div>
-                    <h3 class="roadmap-title">AI Workflow</h3>
-                    <p class="roadmap-description">定時生成報表並自動寄送至 Email。當超過預算或支出異常升高時，AI 會主動發送提醒與建議。</p>
-                    <ul class="roadmap-features">
-                        <li>每週/月報自動生成</li>
-                        <li>Email 與 Push 通知</li>
-                        <li>智能預算提醒</li>
-                    </ul>
-                </div>
-                <div class="roadmap-item">
-                    <div class="roadmap-badge upcoming">即將推出</div>
                     <h3 class="roadmap-title">Batch Processing</h3>
                     <p class="roadmap-description">批次上傳多張收據，AI 批次解析並生成待審核的交易清單，支援批次分類與標註。</p>
                     <ul class="roadmap-features">
                         <li>一次上傳多張收據</li>
                         <li>批次審核與確認</li>
                         <li>批次分類功能</li>
+                    </ul>
+
+                </div>
+                <div class="roadmap-item">
+                    <div class="roadmap-badge upcoming">即將推出</div>
+                    <h3 class="roadmap-title">AI Workflow</h3>
+                    <p class="roadmap-description">定時生成報表並自動寄送至 Email。當超過預算或支出異常升高時，AI 會主動發送提醒與建議。</p>
+                    <ul class="roadmap-features">
+                        <li>每週/月報自動生成</li>
+                        <li>Email 與 Push 通知</li>
+                        <li>智能預算提醒</li>
                     </ul>
                 </div>
                 <div class="roadmap-item">
@@ -314,7 +331,7 @@
                     <a href="https://expo.dev/@your-username/auraspend" class="download-btn expo" target="_blank" rel="noopener noreferrer">
                         <img src="assets/badges/expo-download.svg" alt="Try with Expo">
                     </a> -->
-                    <a href="https://github.com/BYLinMou/COMP3330-Gp20-AuraSpend/releases" class="download-btn apk" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/BYLinMou/COMP3330-Gp20-AuraSpend/releases/latest/download/AuraSpend.apk" class="download-btn apk" rel="noopener noreferrer">
                         <img src="assets/badges/apk-badge.svg" alt="Download APK">
                     </a>
                 </div>
