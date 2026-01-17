@@ -5,7 +5,17 @@ const heroVideoContainer = document.querySelector('#hero-video-container');
 const pipCloseButton = document.querySelector('.pip-close');
 const heroYtIframe = document.querySelector('#hero-yt');
 
+/*
 // Auto unmute on first user interaction
+//
+// NOTE: Disabled per UX request — this feature caused the video to become audible on *any*
+// user gesture (click/keydown/touch/pointer). Keeping the code here commented-out so it
+// can be restored or feature-flagged later if needed.
+//
+// To re-enable: remove the surrounding comment block and ensure you handle browser
+// autoplay policies and provide an explicit opt-in (recommended: only unmute on an
+// explicit "Unmute" button click).
+
 let hasUnmuted = false;
 
 const removeAutoUnmuteListeners = () => {
@@ -53,6 +63,7 @@ const autoUnmute = (evt) => {
 ['click', 'keydown', 'touchend', 'pointerdown'].forEach(evt =>
     document.addEventListener(evt, autoUnmute, { passive: true })
 );
+*/
 
 // Picture-in-Picture functionality
 if (heroVideoContainer && pipCloseButton) {

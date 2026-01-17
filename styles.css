@@ -82,6 +82,7 @@ body {
     color: var(--gray-800);
     background-color: #fff;
     overflow-x: hidden;
+    zoom: 0.9;
 }
 
 .container {
