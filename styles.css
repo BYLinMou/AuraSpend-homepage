@@ -641,8 +641,8 @@ body {
     height: 520px;
     background: #000;
     border-radius: 40px;
-    padding: 6px; /* 減薄外框：從 10px 改為 6px */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* 減輕陰影 */
+    padding: 6px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     transform-style: preserve-3d;
     cursor: pointer;
@@ -685,34 +685,35 @@ body {
     display: block;
 }
 
-/* 狀態定義 */
+/* 狀態定義 - 桌面版同時顯示 3 張 (中間大，兩側小且模糊) */
 .screenshot-item.active {
-    transform: translateX(0) translateZ(150px) scale(1.05);
+    transform: translateX(0) translateZ(120px) scale(1.08);
     z-index: 10;
     opacity: 1;
     filter: blur(0);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12); /* 減輕陰影 */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .screenshot-item.prev {
-    transform: translateX(-300px) translateZ(-100px) rotateY(20deg) scale(0.88);
+    transform: translateX(-310px) translateZ(-80px) rotateY(18deg) scale(0.86);
     z-index: 5;
-    opacity: 0.5;
-    filter: blur(1.5px);
+    opacity: 0.75; /* 提高可見度，讓用戶知道有其他卡片 */
+    filter: blur(1px); /* 適度模糊 */
 }
 
 .screenshot-item.next {
-    transform: translateX(300px) translateZ(-100px) rotateY(-20deg) scale(0.88);
+    transform: translateX(310px) translateZ(-80px) rotateY(-18deg) scale(0.86);
     z-index: 5;
-    opacity: 0.5;
-    filter: blur(1.5px);
+    opacity: 0.75;
+    filter: blur(1px);
 }
 
 .screenshot-item.hidden {
-    transform: translateX(0) translateZ(-500px) scale(0.5);
+    transform: translateX(0) translateZ(-500px) scale(0.4);
     z-index: 1;
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
 }
 
 /* 標題優化 */

@@ -171,7 +171,10 @@ function initCarousel() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const interval = parseInt(carouselEl.dataset.interval ?? '3000', 10) || 3000;
     const autoplayAttr = String(carouselEl.dataset.autoplay ?? 'true');
-    const autoplay = autoplayAttr === 'force' || (autoplayAttr === 'true' && !prefersReducedMotion);
+    // 強制啟用自動播放，忽略 prefers-reduced-motion
+    const autoplay = true;
+
+    console.log('🔧 Carousel Init:', { prefersReducedMotion, interval, autoplayAttr, autoplay: true });
 
     let slides = Array.from(screenshotsTrackEl.querySelectorAll('.screenshot-item'));
     if (!slides.length) return;
@@ -284,12 +287,21 @@ function initCarousel() {
 
     // Autoplay
     const startAutoplay = () => {
-        if (!autoplay || autoplayTimer) return;
+        if (!autoplay) {
+            console.warn('⚠️ Autoplay disabled');
+            return;
+        }
+        if (autoplayTimer) {
+            console.log('⏰ Autoplay already running');
+            return;
+        }
+        console.log('▶️ Starting autoplay with interval:', interval);
         autoplayTimer = setInterval(next, interval);
     };
 
     const stopAutoplay = () => {
         if (!autoplayTimer) return;
+        console.log('⏸️ Stopping autoplay');
         clearInterval(autoplayTimer);
         autoplayTimer = null;
     };
