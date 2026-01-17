@@ -100,10 +100,10 @@ if (heroVideoContainer && pipCloseButton) {
         heroVideoContainer.classList.remove('pip-mode');
         pipEnabled = false;
         
-        // Re-enable PiP after 3 seconds
+        // Re-enable PiP after 1.5 seconds
         setTimeout(() => {
             pipEnabled = true;
-        }, 3000);
+        }, 1500);
     });
 }
 
@@ -157,53 +157,239 @@ window.addEventListener('scroll', () => {
 
 
 // ===========================
-// Screenshots Carousel
+// 3D Screenshots Carousel (真正的無限循環)
+// Features: 3s autoplay, pause-on-hover, 中間最大、兩側較小且模糊
 // ===========================
-const screenshotsTrack = document.querySelector('.screenshots-track');
-const prevButton = document.querySelector('.carousel-button.prev');
-const nextButton = document.querySelector('.carousel-button.next');
+const carouselEl = document.querySelector('.screenshots-carousel');
+const screenshotsTrackEl = document.querySelector('.screenshots-track');
+const prevButtonEl = document.querySelector('.carousel-button.prev');
+const nextButtonEl = document.querySelector('.carousel-button.next');
 
-if (screenshotsTrack && prevButton && nextButton) {
-    const scrollAmount = 320; // width of screenshot item + gap
-    
-    prevButton.addEventListener('click', () => {
-        screenshotsTrack.scrollBy({
-            left: -scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-    
-    nextButton.addEventListener('click', () => {
-        screenshotsTrack.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Hide/show buttons based on scroll position
-    const updateCarouselButtons = () => {
-        const maxScroll = screenshotsTrack.scrollWidth - screenshotsTrack.clientWidth;
-        
-        if (screenshotsTrack.scrollLeft <= 0) {
-            prevButton.style.opacity = '0.3';
-            prevButton.style.pointerEvents = 'none';
-        } else {
-            prevButton.style.opacity = '1';
-            prevButton.style.pointerEvents = 'auto';
-        }
-        
-        if (screenshotsTrack.scrollLeft >= maxScroll - 10) {
-            nextButton.style.opacity = '0.3';
-            nextButton.style.pointerEvents = 'none';
-        } else {
-            nextButton.style.opacity = '1';
-            nextButton.style.pointerEvents = 'auto';
+function initCarousel() {
+    if (!carouselEl || !screenshotsTrackEl || !prevButtonEl || !nextButtonEl) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const interval = parseInt(carouselEl.dataset.interval ?? '3000', 10) || 3000;
+    const autoplayAttr = String(carouselEl.dataset.autoplay ?? 'true');
+    const autoplay = autoplayAttr === 'force' || (autoplayAttr === 'true' && !prefersReducedMotion);
+
+    let slides = Array.from(screenshotsTrackEl.querySelectorAll('.screenshot-item'));
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    let isAnimating = false;
+    let autoplayTimer = null;
+
+    // Create pagination dots
+    const dotsEl = carouselEl.querySelector('.carousel-dots');
+    const announcer = carouselEl.querySelector('.carousel-announcer');
+    const slideCount = slides.length;
+
+    const createDots = () => {
+        if (!dotsEl) return;
+        dotsEl.innerHTML = '';
+        for (let i = 0; i < slideCount; i++) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.setAttribute('aria-label', `顯示第 ${i + 1} 張`);
+            btn.setAttribute('role', 'tab');
+            btn.dataset.index = i;
+            if (i === 0) btn.setAttribute('aria-selected', 'true');
+            dotsEl.appendChild(btn);
+            btn.addEventListener('click', () => goTo(i));
         }
     };
-    
-    screenshotsTrack.addEventListener('scroll', updateCarouselButtons);
-    updateCarouselButtons(); // Initial state
+
+    // 更新卡片位置和樣式
+    const updateSlides = () => {
+        slides.forEach((slide, index) => {
+            // 移除所有狀態類
+            slide.classList.remove('active', 'prev', 'next', 'hidden');
+
+            // 計算相對位置
+            let diff = index - currentIndex;
+
+            // 處理循環（例如：從最後一張到第一張）
+            if (diff > slideCount / 2) diff -= slideCount;
+            if (diff < -slideCount / 2) diff += slideCount;
+
+            // 添加對應的類
+            if (diff === 0) {
+                slide.classList.add('active');
+            } else if (diff === -1) {
+                slide.classList.add('prev');
+            } else if (diff === 1) {
+                slide.classList.add('next');
+            } else {
+                slide.classList.add('hidden');
+            }
+        });
+    };
+
+    const updateUI = () => {
+        // 更新點點
+        const dots = Array.from(dotsEl?.children || []);
+        dots.forEach((d, i) => {
+            d.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+        });
+
+        // 更新螢幕閱讀器提示
+        if (announcer) {
+            announcer.textContent = `第 ${currentIndex + 1} 張，共 ${slideCount} 張`;
+        }
+    };
+
+    // 確保可見圖片已加載
+    const ensureVisibleImages = () => {
+        // 加載當前和相鄰的圖片
+        [-1, 0, 1].forEach(offset => {
+            let index = (currentIndex + offset + slideCount) % slideCount;
+            const slide = slides[index];
+            if (!slide) return;
+            const img = slide.querySelector('img[loading="lazy"][data-src]');
+            if (img && img.dataset.src && img.src !== img.dataset.src) {
+                img.src = img.dataset.src;
+            }
+        });
+    };
+
+    const goTo = (targetIndex) => {
+        if (isAnimating) return;
+
+        // 正規化索引
+        targetIndex = (targetIndex + slideCount) % slideCount;
+
+        if (targetIndex === currentIndex) return;
+
+        isAnimating = true;
+        currentIndex = targetIndex;
+
+        ensureVisibleImages();
+        updateSlides();
+        updateUI();
+
+        // 等待動畫完成
+        setTimeout(() => {
+            isAnimating = false;
+        }, 600);
+    };
+
+    const next = () => {
+        goTo(currentIndex + 1);
+    };
+
+    const prev = () => {
+        goTo(currentIndex - 1);
+    };
+
+    // Autoplay
+    const startAutoplay = () => {
+        if (!autoplay || autoplayTimer) return;
+        autoplayTimer = setInterval(next, interval);
+    };
+
+    const stopAutoplay = () => {
+        if (!autoplayTimer) return;
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+    };
+
+    // 觸控/滑動支援
+    let touchStart = { x: 0, y: 0 };
+    let touchEnd = { x: 0, y: 0 };
+
+    const handleTouchStart = (e) => {
+        touchStart.x = e.touches[0].clientX;
+        touchStart.y = e.touches[0].clientY;
+        stopAutoplay();
+    };
+
+    const handleTouchMove = (e) => {
+        touchEnd.x = e.touches[0].clientX;
+        touchEnd.y = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = () => {
+        const diffX = touchStart.x - touchEnd.x;
+        const diffY = touchStart.y - touchEnd.y;
+
+        // 只在水平滑動明顯時觸發
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                next();
+            } else {
+                prev();
+            }
+        }
+
+        startAutoplay();
+    };
+
+    // Keyboard navigation
+    const handleKeydown = (e) => {
+        if (e.key === 'ArrowLeft') {
+            prev();
+            e.preventDefault();
+        } else if (e.key === 'ArrowRight') {
+            next();
+            e.preventDefault();
+        }
+    };
+
+    // 點擊側邊卡片也可以切換
+    slides.forEach((slide, index) => {
+        slide.addEventListener('click', () => {
+            if (index !== currentIndex) {
+                goTo(index);
+            }
+        });
+    });
+
+    // Event listeners
+    prevButtonEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prev();
+        stopAutoplay();
+        startAutoplay();
+    });
+
+    nextButtonEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        next();
+        stopAutoplay();
+        startAutoplay();
+    });
+
+    // Pause on hover/focus
+    carouselEl.addEventListener('mouseenter', stopAutoplay);
+    carouselEl.addEventListener('mouseleave', startAutoplay);
+    carouselEl.addEventListener('focusin', stopAutoplay);
+    carouselEl.addEventListener('focusout', startAutoplay);
+
+    // Touch events
+    screenshotsTrackEl.addEventListener('touchstart', handleTouchStart, { passive: true });
+    screenshotsTrackEl.addEventListener('touchmove', handleTouchMove, { passive: true });
+    screenshotsTrackEl.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    // Keyboard
+    carouselEl.addEventListener('keydown', handleKeydown);
+
+    // Init
+    createDots();
+    ensureVisibleImages();
+    updateSlides();
+    updateUI();
+
+    if (autoplay) {
+        startAutoplay();
+    }
+
+    console.debug('✅ 3D Carousel initialized with', slideCount, 'slides');
 }
+
+// Initialize the carousel
+initCarousel();
+
 
 // ===========================
 // Smooth Scroll for Anchor Links

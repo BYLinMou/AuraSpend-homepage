@@ -195,35 +195,47 @@
                 <h2 class="section-title">應用展示</h2>
                 <p class="section-subtitle">探索 AuraSpend 的精美介面與強大功能</p>
             </div>
-            <div class="screenshots-carousel">
-                <button class="carousel-button prev" aria-label="Previous">‹</button>
-                <div class="screenshots-track">
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/dashboard.png" alt="儀表板">
-                        <p class="screenshot-caption">儀表板總覽</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/add-transaction.png" alt="添加交易">
-                        <p class="screenshot-caption">添加交易</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/reports.png" alt="報表分析">
-                        <p class="screenshot-caption">視覺化報表</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/pet.png" alt="寵物頁面">
-                        <p class="screenshot-caption">寵物與成就</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/ai-assistant.png" alt="AI 助手">
-                        <p class="screenshot-caption">AI 聊天助手</p>
-                    </div>
-                    <div class="screenshot-item">
-                        <img src="assets/screenshots/settings.png" alt="設定">
-                        <p class="screenshot-caption">設定與偏好</p>
+            <div class="screenshots-carousel" data-autoplay="true" data-interval="3000" role="region" aria-label="App screenshots carousel" tabindex="0">
+                <button class="carousel-button prev" aria-label="Previous slide">‹</button>
+
+                <!-- Viewport wraps the track to enable transform-based sliding -->
+                <div class="screenshots-viewport">
+                    <div class="screenshots-track" aria-live="polite">
+                        <!-- Use lightweight inline SVG as initial placeholder; real images are set in data-src -->
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/dashboard.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="儀表板">
+                            <p class="screenshot-caption">儀表板總覽</p>
+                        </div>
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/add-transaction.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="添加交易">
+                            <p class="screenshot-caption">添加交易</p>
+                        </div>
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/reports.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="報表分析">
+                            <p class="screenshot-caption">視覺化報表</p>
+                        </div>
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/pet.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="寵物頁面">
+                            <p class="screenshot-caption">寵物與成就</p>
+                        </div>
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/ai-assistant.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="AI 助手">
+                            <p class="screenshot-caption">AI 聊天助手</p>
+                        </div>
+                        <div class="screenshot-item">
+                            <img loading="lazy" data-src="assets/screenshots/settings.png" src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20960'%3E%3Crect%20width='100%25'%20height='100%25'%20fill='%23F3F4F6'/%3E%3C/text%3E%3C/svg%3E" alt="設定">
+                            <p class="screenshot-caption">設定與偏好</p>
+                        </div>
                     </div>
                 </div>
-                <button class="carousel-button next" aria-label="Next">›</button>
+
+                <button class="carousel-button next" aria-label="Next slide">›</button>
+
+                <!-- Dots (will be populated by JS) -->
+                <div class="carousel-dots" role="tablist" aria-label="Carousel pagination"></div>
+
+                <!-- Live region for screen reader announcements -->
+                <div class="carousel-announcer sr-only" aria-live="polite" aria-atomic="true"></div>
             </div>
         </div>
     </section>
