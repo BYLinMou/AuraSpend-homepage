@@ -500,10 +500,29 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto var(--spacing-md);
+    margin: 0;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 5;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.step-number::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+    opacity: 0.7;
+    filter: blur(2px);
+    pointer-events: none;
+}
 }
 
 .step-visual {
+    position: relative;
     width: 100%;
     height: 250px;
     background: white;
