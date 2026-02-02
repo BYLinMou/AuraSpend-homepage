@@ -174,8 +174,6 @@ function initCarousel() {
     // 強制啟用自動播放，忽略 prefers-reduced-motion
     const autoplay = true;
 
-    console.log('🔧 Carousel Init:', { prefersReducedMotion, interval, autoplayAttr, autoplay: true });
-
     let slides = Array.from(screenshotsTrackEl.querySelectorAll('.screenshot-item'));
     if (!slides.length) return;
 
@@ -287,21 +285,14 @@ function initCarousel() {
 
     // Autoplay
     const startAutoplay = () => {
-        if (!autoplay) {
-            console.warn('⚠️ Autoplay disabled');
+        if (!autoplay || autoplayTimer) {
             return;
         }
-        if (autoplayTimer) {
-            console.log('⏰ Autoplay already running');
-            return;
-        }
-        // console.log('▶️ Starting autoplay with interval:', interval);
         autoplayTimer = setInterval(next, interval);
     };
 
     const stopAutoplay = () => {
         if (!autoplayTimer) return;
-        // console.log('⏸️ Stopping autoplay');
         clearInterval(autoplayTimer);
         autoplayTimer = null;
     };
@@ -396,7 +387,6 @@ function initCarousel() {
         startAutoplay();
     }
 
-    console.debug('✅ 3D Carousel initialized with', slideCount, 'slides');
 }
 
 // Initialize the carousel
@@ -485,7 +475,6 @@ langButtons.forEach(button => {
         // Here you would typically load different language content
         // For now, just show an alert
         const lang = button.textContent.includes('English') ? 'en' : 'zh-TW';
-        console.log(`Language switched to: ${lang}`);
         // TODO: Implement actual language switching logic
     });
 });
@@ -502,7 +491,6 @@ if (betaForm) {
         const email = betaForm.querySelector('input[type="email"]').value;
         
         // TODO: Send to backend
-        console.log('Beta sign-up:', email);
         
         // Show success message
         alert('感謝您的註冊！我們會盡快與您聯繫。');
@@ -518,7 +506,6 @@ const downloadButtons = document.querySelectorAll('.download-btn, .store-badge')
 downloadButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         const platform = button.alt || button.querySelector('img')?.alt || 'unknown';
-        console.log(`Download clicked: ${platform}`);
         
         // TODO: Send analytics event
         // Example: gtag('event', 'download_click', { platform });
@@ -543,8 +530,6 @@ if ('loading' in HTMLImageElement.prototype) {
 // ===========================
 // Initialize
 // ===========================
-console.log('AuraSpend website initialized');
-console.log('Version: 1.0.0');
 
 // YouTube player + controls
 let ytPlayer = null;
