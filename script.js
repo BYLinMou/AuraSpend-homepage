@@ -1,7 +1,6 @@
 // ===========================
 // Language Switcher
 // ===========================
-const langButtons = document.querySelectorAll('.lang-switch');
 
 // Get current language from localStorage or default to zh-TW
 function getCurrentLanguage() {
@@ -13,12 +12,20 @@ function setCurrentLanguage(lang) {
     localStorage.setItem('auraspend-lang', lang);
 }
 
+// Get current year for dynamic replacement
+function getCurrentYear() {
+    return new Date().getFullYear();
+}
+
 // Update page content based on language
 function updatePageLanguage(lang) {
     if (!translations[lang]) {
         console.warn(`Language '${lang}' not found in translations`);
         return;
     }
+
+    // Get current year for dynamic replacement
+    const currentYear = getCurrentYear();
 
     // Update HTML lang attribute
     document.documentElement.lang = lang;
@@ -39,11 +46,14 @@ function updatePageLanguage(lang) {
     elements.forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang][key]) {
+            let text = translations[lang][key];
+            // Replace {year} placeholder with current year
+            text = text.replace('{year}', currentYear);
             // Check if the element has HTML content (like <span> tags)
-            if (translations[lang][key].includes('<')) {
-                element.innerHTML = translations[lang][key];
+            if (text.includes('<')) {
+                element.innerHTML = text;
             } else {
-                element.textContent = translations[lang][key];
+                element.textContent = text;
             }
         }
     });
@@ -74,6 +84,7 @@ function updatePageLanguage(lang) {
     });
 
     // Update lang buttons active state
+    const langButtons = document.querySelectorAll('.lang-switch');
     langButtons.forEach(btn => {
         const btnLang = btn.getAttribute('data-lang');
         if (btnLang === lang) {
@@ -88,16 +99,17 @@ function updatePageLanguage(lang) {
 function initLanguage() {
     const currentLang = getCurrentLanguage();
     updatePageLanguage(currentLang);
-}
-
-// Language switcher event listeners
-langButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const lang = button.getAttribute('data-lang');
-        setCurrentLanguage(lang);
-        updatePageLanguage(lang);
+    
+    // Language switcher event listeners
+    const langButtons = document.querySelectorAll('.lang-switch');
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const lang = button.getAttribute('data-lang');
+            setCurrentLanguage(lang);
+            updatePageLanguage(lang);
+        });
     });
-});
+}
 
 // Initialize language on DOM ready
 if (document.readyState === 'loading') {
@@ -486,110 +498,20 @@ function initCarousel() {
     screenshotsTrackEl.addEventListener('touchmove', handleTouchMove, { passive: true });
     screenshotsTrackEl.addEventListener('touchend', handleTouchEnd, { passive: true });
 
-    // Keyboard
+    // Keyboard navigation
     carouselEl.addEventListener('keydown', handleKeydown);
 
-    // Init
+    // Initialize
     createDots();
-    ensureVisibleImages();
     updateSlides();
     updateUI();
-
-    if (autoplay) {
-        startAutoplay();
-    }
-
+    ensureVisibleImages();
+    startAutoplay();
 }
 
-// Initialize the carousel
-initCarousel();
-
-
-// ===========================
-// Smooth Scroll for Anchor Links
-// ===========================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        
-        e.preventDefault();
-        const target = document.querySelector(href);
-        
-        if (target) {
-            const offsetTop = target.offsetTop - 80; // navbar height
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// ===========================
-// Intersection Observer for Animations
-// ===========================
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-const animateElements = document.querySelectorAll(
-    '.feature-card, .step, .screenshot-item, .roadmap-item, .highlight-card'
-);
-
-animateElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// Add animation styles
-const style = document.createElement('style');
-style.textContent = `
-    .animate-in {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-    
-    .navbar.scroll-down {
-        transform: translateY(-100%);
-    }
-    
-    .navbar.scroll-up {
-        transform: translateY(0);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-`;
-document.head.appendChild(style);
-
-// ===========================
-// Form Handling (Beta Sign-up)
-// ===========================
-// If you add a beta sign-up form later, you can handle it here
-const betaForm = document.querySelector('.beta-form');
-
-if (betaForm) {
-    betaForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = betaForm.querySelector('input[type="email"]').value;
-        
-        // TODO: Send to backend
-        
-        // Show success message
-        const currentLang = getCurrentLanguage();
-        alert(translations[currentLang]['beta.success']);
-        betaForm.reset();
-    });
+// Initialize carousel on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+} else {
+    initCarousel();
 }

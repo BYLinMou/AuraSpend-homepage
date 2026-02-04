@@ -142,7 +142,7 @@ const translations = {
         'footer.github-issues': 'GitHub Issues',
         'footer.privacy': '隱私政策',
         'footer.terms': '服務條款',
-        'footer.copyright': '&copy; 2026 AuraSpend. All rights reserved.',
+        'footer.copyright': '© {year} AuraSpend. All rights reserved.',
         'footer.lang-zh': '繁體中文',
         'footer.lang-en': 'English',
         
@@ -289,7 +289,7 @@ const translations = {
         'footer.github-issues': 'GitHub Issues',
         'footer.privacy': 'Privacy Policy',
         'footer.terms': 'Terms of Service',
-        'footer.copyright': '&copy; 2026 AuraSpend. All rights reserved.',
+        'footer.copyright': '© {year} AuraSpend. All rights reserved.',
         'footer.lang-zh': '繁體中文',
         'footer.lang-en': 'English',
         
