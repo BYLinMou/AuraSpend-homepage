@@ -933,6 +933,144 @@ body {
 }
 
 /* ===========================
+   Pricing Section
+   =========================== */
+.pricing {
+    padding: var(--spacing-3xl) 0;
+    background: var(--gray-50);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    align-items: stretch; /* Make cards same height */
+}
+
+.pricing-card {
+    background: white;
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 2px solid var(--gray-200);
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: var(--shadow-md);
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.pricing-card.popular {
+    border-color: var(--primary);
+    transform: scale(1.05);
+    z-index: 5;
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-header {
+    margin-bottom: var(--spacing-md);
+}
+
+.pricing-tier {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.pricing-price {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-md);
+}
+
+.pricing-price span {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--gray-500);
+}
+
+.pricing-features {
+    list-style: none;
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+    flex-grow: 1; /* Make feature list expand */
+}
+
+.pricing-features li {
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--gray-600);
+    font-size: var(--font-size-sm);
+}
+
+.pricing-features li b {
+    color: var(--primary-dark);
+}
+
+.check-icon {
+    color: var(--success);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.btn-primary-outline {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: auto; /* Push button to bottom */
+}
+
+.pricing-card .btn-primary {
+    margin-top: auto;
+}
+
+.btn-primary-outline:hover {
+    background: var(--primary);
+    color: white;
+}
+
+@media (max-width: 1200px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    .pricing-card.popular {
+        transform: scale(1);
+    }
+}
+
+/* ===========================
    Download Section
    =========================== */
 .download {
