@@ -1,4 +1,112 @@
 // ===========================
+// Language Switcher
+// ===========================
+const langButtons = document.querySelectorAll('.lang-switch');
+
+// Get current language from localStorage or default to zh-TW
+function getCurrentLanguage() {
+    return localStorage.getItem('auraspend-lang') || 'zh-TW';
+}
+
+// Set current language
+function setCurrentLanguage(lang) {
+    localStorage.setItem('auraspend-lang', lang);
+}
+
+// Update page content based on language
+function updatePageLanguage(lang) {
+    if (!translations[lang]) {
+        console.warn(`Language '${lang}' not found in translations`);
+        return;
+    }
+
+    // Update HTML lang attribute
+    document.documentElement.lang = lang;
+
+    // Update meta tags
+    const metaDescription = document.querySelector('meta[name="description"]');
+    const metaTitle = document.querySelector('title');
+    
+    if (metaDescription && translations[lang]['meta.description']) {
+        metaDescription.setAttribute('content', translations[lang]['meta.description']);
+    }
+    if (metaTitle && translations[lang]['meta.title']) {
+        metaTitle.textContent = translations[lang]['meta.title'];
+    }
+
+    // Update all elements with data-i18n attribute
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            // Check if the element has HTML content (like <span> tags)
+            if (translations[lang][key].includes('<')) {
+                element.innerHTML = translations[lang][key];
+            } else {
+                element.textContent = translations[lang][key];
+            }
+        }
+    });
+
+    // Update aria-label for PiP close button
+    const pipCloseButton = document.querySelector('.pip-close');
+    if (pipCloseButton && translations[lang]['hero.pip-close']) {
+        pipCloseButton.setAttribute('aria-label', translations[lang]['hero.pip-close']);
+    }
+
+    // Update carousel announcer text
+    const announcer = document.querySelector('.carousel-announcer');
+    if (announcer) {
+        const currentSlide = document.querySelector('.screenshot-item.active');
+        const slideCount = document.querySelectorAll('.screenshot-item').length;
+        if (currentSlide) {
+            const currentIndex = Array.from(document.querySelectorAll('.screenshot-item')).indexOf(currentSlide) + 1;
+            announcer.textContent = translations[lang]['screenshots.announcer']
+                .replace('{current}', currentIndex)
+                .replace('{total}', slideCount);
+        }
+    }
+
+    // Update carousel dots aria-label
+    const dots = document.querySelectorAll('.carousel-dots button');
+    dots.forEach((dot, index) => {
+        dot.setAttribute('aria-label', translations[lang]['screenshots.show-slide'].replace('{index}', index + 1));
+    });
+
+    // Update lang buttons active state
+    langButtons.forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang');
+        if (btnLang === lang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
+// Initialize language on page load
+function initLanguage() {
+    const currentLang = getCurrentLanguage();
+    updatePageLanguage(currentLang);
+}
+
+// Language switcher event listeners
+langButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const lang = button.getAttribute('data-lang');
+        setCurrentLanguage(lang);
+        updatePageLanguage(lang);
+    });
+});
+
+// Initialize language on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguage);
+} else {
+    initLanguage();
+}
+
+// ===========================
 // Picture-in-Picture for Hero Video & Auto Unmute
 // ===========================
 const heroVideoContainer = document.querySelector('#hero-video-container');
@@ -189,10 +297,11 @@ function initCarousel() {
     const createDots = () => {
         if (!dotsEl) return;
         dotsEl.innerHTML = '';
+        const currentLang = getCurrentLanguage();
         for (let i = 0; i < slideCount; i++) {
             const btn = document.createElement('button');
             btn.type = 'button';
-            btn.setAttribute('aria-label', `顯示第 ${i + 1} 張`);
+            btn.setAttribute('aria-label', translations[currentLang]['screenshots.show-slide'].replace('{index}', i + 1));
             btn.setAttribute('role', 'tab');
             btn.dataset.index = i;
             if (i === 0) btn.setAttribute('aria-selected', 'true');
@@ -236,7 +345,10 @@ function initCarousel() {
 
         // 更新螢幕閱讀器提示
         if (announcer) {
-            announcer.textContent = `第 ${currentIndex + 1} 張，共 ${slideCount} 張`;
+            const currentLang = getCurrentLanguage();
+            announcer.textContent = translations[currentLang]['screenshots.announcer']
+                .replace('{current}', currentIndex + 1)
+                .replace('{total}', slideCount);
         }
     };
 
@@ -463,23 +575,6 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ===========================
-// Language Switcher
-// ===========================
-const langButtons = document.querySelectorAll('.lang-switch');
-
-langButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        langButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        // Here you would typically load different language content
-        // For now, just show an alert
-        const lang = button.textContent.includes('English') ? 'en' : 'zh-TW';
-        // TODO: Implement actual language switching logic
-    });
-});
-
-// ===========================
 // Form Handling (Beta Sign-up)
 // ===========================
 // If you add a beta sign-up form later, you can handle it here
@@ -493,111 +588,8 @@ if (betaForm) {
         // TODO: Send to backend
         
         // Show success message
-        alert('感謝您的註冊！我們會盡快與您聯繫。');
+        const currentLang = getCurrentLanguage();
+        alert(translations[currentLang]['beta.success']);
         betaForm.reset();
     });
 }
-
-// ===========================
-// Download Button Analytics
-// ===========================
-const downloadButtons = document.querySelectorAll('.download-btn, .store-badge');
-
-downloadButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        const platform = button.alt || button.querySelector('img')?.alt || 'unknown';
-        
-        // TODO: Send analytics event
-        // Example: gtag('event', 'download_click', { platform });
-    });
-});
-
-// ===========================
-// Performance: Lazy Loading Images
-// ===========================
-if ('loading' in HTMLImageElement.prototype) {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        img.src = img.dataset.src;
-    });
-} else {
-    // Fallback for browsers that don't support lazy loading
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-    document.body.appendChild(script);
-}
-
-// ===========================
-// Initialize
-// ===========================
-
-// YouTube player + controls
-let ytPlayer = null;
-function loadYouTubeAPI() {
-    if (window.YT && window.YT.Player) {
-        onYouTubeIframeAPIReady();
-        return;
-    }
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-}
-
-window.onYouTubeIframeAPIReady = function () {
-    const el = document.getElementById('hero-yt');
-    if (!el) return;
-    ytPlayer = new YT.Player('hero-yt', {
-        events: {
-            'onReady': (e) => {
-                // Try to play immediately (muted) to ensure autoplay works
-                try { 
-                    e.target.mute(); 
-                    e.target.playVideo();
-                } catch (err) {}
-                updateHeroControls();
-            },
-            'onStateChange': () => updateHeroControls()
-        }
-    });
-};
-
-function updateHeroControls() {
-    const playBtn = document.querySelector('.hero-play');
-    const muteBtn = document.querySelector('.hero-mute');
-    if (!ytPlayer || !window.YT || !playBtn || !muteBtn) return;
-    try {
-        const state = ytPlayer.getPlayerState();
-        playBtn.textContent = (state === YT.PlayerState.PLAYING) ? '⏸' : '▶';
-        muteBtn.textContent = (ytPlayer.isMuted()) ? '🔈' : '🔊';
-    } catch (err) {}
-}
-
-// Wire buttons (DOM ready)
-document.addEventListener('DOMContentLoaded', () => {
-    const playBtn = document.querySelector('.hero-play');
-    const muteBtn = document.querySelector('.hero-mute');
-
-    if (playBtn) playBtn.addEventListener('click', () => {
-        if (!ytPlayer) return;
-        try {
-            const state = ytPlayer.getPlayerState();
-            if (state === YT.PlayerState.PLAYING) ytPlayer.pauseVideo(); else ytPlayer.playVideo();
-            updateHeroControls();
-        } catch (err) {}
-    });
-
-    if (muteBtn) muteBtn.addEventListener('click', () => {
-        if (!ytPlayer) return;
-        try {
-            if (ytPlayer.isMuted()) { ytPlayer.unMute(); ytPlayer.playVideo(); } else { ytPlayer.mute(); }
-            updateHeroControls();
-        } catch (err) {}
-    });
-
-    loadYouTubeAPI();
-});
-
-// Add loading animation removal
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
