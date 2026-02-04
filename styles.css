@@ -554,17 +554,20 @@ body {
 
 .screenshots-carousel {
     position: relative;
-    height: 600px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     perspective: 2000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .screenshots-viewport {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 600px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -665,23 +668,24 @@ body {
 
 /* 標題優化 */
 .screenshot-caption {
-    position: absolute;
-    /* bottom: -65px; */
-    left: 0;
+    position: relative;
     width: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
     text-align: center;
     font-size: 1rem;
     font-weight: 700;
     color: var(--gray-800);
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(60px);
     transition: all 0.4s ease;
-    padding-top: 50px;
+    pointer-events: none;
 }
 
 .screenshot-item.active .screenshot-caption {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(46px);
 }
 
 /* 控制按鈕 */
@@ -729,14 +733,16 @@ body {
 
 /* 分頁點 - 絕對置中並修復位置 */
 .carousel-dots {
-    position: absolute;
-    /* bottom: 15px; */
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    left: auto;
+    transform: none;
     display: flex;
+    justify-content: center;
     gap: 10px;
     z-index: 25;
     padding: 10px;
+    margin-top: 12px;
+    margin-bottom: 6px;
 }
 
 .carousel-dots button {
@@ -769,8 +775,8 @@ body {
 }
 
 /* 響應式調整 */
-@media (max-width: 900px) {
-    .screenshots-carousel { height: 520px; }
+@media (max-width: 900px) and (min-width: 601px) {
+    .screenshots-viewport { height: 520px; margin-bottom: 44px; }
     .screenshot-item { width: 225px; height: 480px; padding: 6.5px; border-radius: 32px; }
     .screenshot-item img { border-radius: 26px; }
     .screenshot-item.prev { transform: translateX(-240px) translateZ(-80px) rotateY(18deg) scale(0.85); }
@@ -778,10 +784,13 @@ body {
     .carousel-button { width: 42px; height: 42px; }
     .carousel-button.prev { left: 15px; }
     .carousel-button.next { right: 15px; }
+    .carousel-dots { padding: 0px; margin-top: -16px; }
+    .screenshot-caption { transform: translateY(72px); }
+    .screenshot-item.active .screenshot-caption { transform: translateY(56px); }
 }
 
-@media (max-width: 520px) {
-    .screenshots-carousel { height: 450px; }
+@media (max-width: 600px) {
+    .screenshots-viewport { height: 450px; margin-bottom: 52px; }
     .screenshot-item { width: 200px; height: 430px; padding: 5px; border-radius: 32px; }
     .screenshot-item img { border-radius: 26px; }
     .screenshot-item::before { width: 55px; height: 18px; top: 14px; }
@@ -791,6 +800,9 @@ body {
     .carousel-button { width: 38px; height: 38px; font-size: 1.2rem; }
     .carousel-button.prev { left: 10px; }
     .carousel-button.next { right: 10px; }
+    .carousel-dots { padding: 0px; margin-top: -20px; }
+    .screenshot-caption { transform: translateY(80px); }
+    .screenshot-item.active .screenshot-caption { transform: translateY(62px); }
 }
 
 /* 尊重減少動畫偏好 */
