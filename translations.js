@@ -4,7 +4,7 @@
 const translations = {
     'zh-TW': {
         // Meta
-        'meta.description': '用 AI 記帳，讓每筆消費都變得輕鬆。拍張收據，AI 自動填入；專屬助理與互動化報表，幫你看清每一分花費。',
+        'meta.description': '用 AI 記帳，讓每筆消費都變得輕鬆。拍張收據，AI 自動填入；專屬AI助理與互動化報表，幫你看清每一分花費。',
         'meta.title': 'AuraSpend - AI 智能記帳與預算管理',
         
         // Navigation
@@ -17,7 +17,7 @@ const translations = {
         
         // Hero Section
         'hero.title': '用 AI 記帳，<br>讓每筆消費都變得輕鬆',
-        'hero.subtitle': '拍張收據，AI 自動填入；專屬助理與互動化報表，幫你看清每一分花費。',
+        'hero.subtitle': '拍張收據，AI 自動填入；專屬AI助理與互動化報表，幫你看清每一分花費。',
         'hero.download-apk': '立即下載 (APK)',
         'hero.learn-more': '了解更多',
         'hero.pip-close': '關閉小窗口',
@@ -151,7 +151,7 @@ const translations = {
     },
     'en': {
         // Meta
-        'meta.description': 'Track expenses with AI, making every transaction effortless. Snap a receipt, AI fills it in automatically; personal assistant and interactive reports help you see every penny spent.',
+        'meta.description': 'Track expenses with AI, making every transaction effortless. Snap a receipt, AI fills it in automatically; personal AI assistant and interactive reports help you see every penny spent.',
         'meta.title': 'AuraSpend - AI Smart Expense Tracking & Budget Management',
         
         // Navigation
@@ -164,7 +164,7 @@ const translations = {
         
         // Hero Section
         'hero.title': 'Track Expenses with AI,<br>Make Every Transaction Effortless',
-        'hero.subtitle': 'Snap a receipt, AI fills it in automatically; personal assistant and interactive reports help you see every penny spent.',
+        'hero.subtitle': 'Snap a receipt, AI fills it in automatically; personal AI assistant and interactive reports help you see every penny spent.',
         'hero.download-apk': 'Download Now (APK)',
         'hero.learn-more': 'Learn More',
         'hero.pip-close': 'Close',

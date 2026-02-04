@@ -369,11 +369,11 @@ body {
 
 .hero-gradient {
     position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 100%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    top: 5%;
+    left: 35%;
+    width: 70%;
+    height: 90%;
+    background: radial-gradient(circle at 85% 20%, rgba(99, 102, 241, 0.14) 0%, transparent 55%);
     pointer-events: none;
 }
 
@@ -501,24 +501,12 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0;
-    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
     position: absolute;
     top: 16px;
     left: 16px;
     z-index: 5;
     border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-.step-number::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
-    opacity: 0.7;
-    filter: blur(2px);
-    pointer-events: none;
-}
 }
 
 .step-visual {
