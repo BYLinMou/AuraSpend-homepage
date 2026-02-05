@@ -527,6 +527,10 @@ function initCarousel() {
     carouselEl.addEventListener('mouseenter', stopAutoplay);
     carouselEl.addEventListener('mouseleave', startAutoplay);
 
+    // Pause on focus
+    carouselEl.addEventListener('focusin', stopAutoplay);
+    carouselEl.addEventListener('focusout', startAutoplay);
+
     // Initialize
     createDots();
     updateSlides();
