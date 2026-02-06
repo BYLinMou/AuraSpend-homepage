@@ -88,7 +88,6 @@ body {
     line-height: 1.6;
     color: var(--gray-800);
     background-color: #fff;
-    overflow-x: hidden;
     zoom: 0.9;
 }
 
@@ -557,6 +556,7 @@ body {
 .screenshots {
     padding: var(--spacing-3xl) 0;
     background: #fafafa;
+    overflow: hidden;
 }
 
 .screenshots-carousel {
@@ -1322,7 +1322,8 @@ body {
         font-size: var(--font-size-3xl);
     }
     
-    .features-grid {
+    .features-grid,
+    .roadmap-timeline {
         grid-template-columns: 1fr;
     }
     
@@ -1375,5 +1376,26 @@ body {
         /* align-items: center; */
         height: 50px;
         width: auto;
+    }
+
+    /* Carousel adjustments for small screens */
+    .screenshots-viewport {
+        height: 420px;
+    }
+    .screenshot-item {
+        width: 180px;
+        height: 387px;
+    }
+    .screenshot-item.prev {
+        transform: translateX(-110px) translateZ(-40px) rotateY(15deg) scale(0.75);
+    }
+    .screenshot-item.next {
+        transform: translateX(110px) translateZ(-40px) rotateY(15deg) scale(0.75);
+    }
+    .carousel-button.prev {
+        left: 5px;
+    }
+    .carousel-button.next {
+        right: 5px;
     }
 }
